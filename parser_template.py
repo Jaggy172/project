@@ -25,7 +25,7 @@ for title in header.split('\t'):
 #open our output files, one per table.
 genefile=open('genes.txt', 'w')
 expressionfile=open('expression.txt', 'w')
-probefile=['ID_REF','GENE ID']
+probefile=open('probes.txt','w')
 
 #defines which columns are to go in each output file. For samples it is the 3rd header until the gene title header and they will be separated by '\t'
 genefields=['Gene ID', 'Gene symbol', 'Gene title']
@@ -45,7 +45,7 @@ def buildrow(row, fields):
     return "\t".join(newrow)+"\n"
 
 
-	#creates the rows for the expression file, is slightly different because for each probe and experiment there are several gene expression values.
+#creates the rows for the expression file, is slightly different because for each probe and experiment there are several gene expression values.
 def build_expression(row, samples):
     '''Builds tab separated rows for expression data. For each of the samples listed 
         it generates a line with the probe id, sample id and expression value.
@@ -59,8 +59,8 @@ def build_expression(row, samples):
         newrow.append(row[int(colnames[s])])
         exprrows.append("\t".join(newrow))
     return "\n".join(exprrows)+"\n"
-	
-	
+
+
 #initialise a counter to count how many probe rows were processed.    
 #writes the data to the files 
 rows=0
@@ -73,9 +73,9 @@ for line in fh.readlines():
         probefile.write(buildrow(row,probefields))
         expressionfile.write(build_expression(row, samples))
         rows=rows+1
-		#increment the row counter
+#increment the row counter
     except:
-              pass
+        pass
 genefile.close()
 probefile.close()
 expressionfile.close()
