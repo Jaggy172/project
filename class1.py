@@ -43,6 +43,7 @@ class Gene():
            self.probelist.append(result[0])
 
     def get_expression(self, Sample_ID):
+        '''Retrieves gene expression values for any given experiment'''
         db=DBHandler()
         cursor=db.cursor()
         sql='SELECT Expression_value where ID_REF=%s AND Sample_ID=%s'
@@ -51,16 +52,8 @@ class Gene():
 
 print("Mission Complete!")
 
-'''Retrieves gene expression values for any given experiment'''
         
  
-
-  def get_expression (self, experiment):
-      exprsql='SELECT expression from expression where sample_id=%S and probe_id in %S'
-  db=DBHandler()
-  cursor=db.cursor()
-  cursor.executive (exprsql,(self.gene_id,self.probe_id))
-
 
 
  
