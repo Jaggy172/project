@@ -12,7 +12,7 @@ class DBHandler():
     def __init__(self):
         '''This initialises the database'''
         if DBHandler.connection == None:
-            DBHandler.connection=MySQLdb.connect(db=DBHandler.dbname, user=DBHandler.dbuser, passwd=DBHandler.dbpassword)
+        '''This Tests wether the database is connected and establishes a connection if it hasn't'''
        
     def cursor(self):
         return DBHandler.connection.cursor()
@@ -22,9 +22,9 @@ class Gene():
     Gene_symbol=''
     Gene_title=''
     Gene_ID=''
-    probelist=[] #Each gene can have more than one probe_id
+    probelist[] #Each gene can have more than one probe_id
    
-    def __init__(self,Gene_ID):
+    def __init__(self,gene_ID):
         '''Initialisation method for Gene Class'''
         db=DBHandler()
         self.Gene_ID=Gene_ID
@@ -37,23 +37,39 @@ class Gene():
 
         probesql='SELECT Gene_ID from Probes where Gene_ID=%s'
         cursor.execute(probesql,(Gene_ID,))
-        #'''fetches the probes'''
+        '''fetches the probes'''
        
         for result in cursor.fetchall():
            self.probelist.append(result[0])
-
     def get_expression(self, Sample_ID):
-        '''Retrieves gene expression values for any given experiment'''
         db=DBHandler()
         cursor=db.cursor()
-        sql='SELECT Expression_value where ID_REF=%s AND Sample_ID=%s'
-	cursor.execute(sql,(ID_REF, Sample_ID))
-	#fetch value from cursor and return it.
+        sql='SELECT Expression_value where ID_REF=%s'
 
 print("Mission Complete!")
 
+'''Retrieves gene expression values for any given experiment'''
         
  
 
+  def get_expression (self, experiment):
+      exprsql='SELECT expression from expression where sample_id=%S and probe_id in %S'
+  db=DBHandler()
+  cursor=db.cursor()
+  cursor.executive (exprsql,(self.gene_id,self.probe_id))
 
- 
+
+
+  protein_id="_"
+  protein_seqeuence="_"
+
+  def_init_(self, id, sequence):
+      self.protein_id=id
+      self.protein_sequence=sequence
+  def aminocount (self, aminoacid):
+      aacount(self,aminoacid):
+      aacount=0
+      for a in self.protein_sequence:
+      if a ==aminoacid:
+           aacount=account+1
+      return account
