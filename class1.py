@@ -30,7 +30,7 @@ class Gene():
         self.Gene_ID=Gene_ID
         cursor=db.cursor()
         sql='SELECT Gene_Title, Gene_Symbol from Genes where Genes=%s'
-        cursor.execute(sql,(Gene_ID,))#Queries the database for result then populates Classfield.
+        cursor.execute(sql,(Gene_ID,))#Queries the database for result then provides Gene_ID
         result=cursor.fetchone()
         self.Gene_Title =result[0]
         self.Gene_Symbol=result[1]
@@ -47,8 +47,8 @@ class Gene():
         db=DBHandler()
         cursor=db.cursor()
         sql='SELECT Expression_value where ID_REF=%s AND Sample_ID=%s'
-	cursor.execute(sql,(ID_REF, Sample_ID))
-	#fetch value from cursor and return it.
+        cursor.execute(sql,(ID_REF, Sample_ID))
+        #fetch value from cursor and return it.
 
 print("Mission Complete!")
 
